@@ -1,32 +1,32 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
-const BlogDetails = ({ blogs }) => {
+function BlogDetails({ blogs }) {
   const { id } = useParams();
-  const navigate = useNavigate();
   const blog = blogs.find((b) => b.id === Number(id));
 
-  if (!blog) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-        <p>Blog not found</p>
-      </div>
-    );
-  }
+  if (!blog) return <div className="text-white text-center">Blog not found</div>;
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white flex items-center justify-center px-4">
-      <div className="max-w-xl bg-white/10 backdrop-blur p-6 rounded-xl shadow-xl">
-        <h1 className="text-3xl font-bold mb-4">{blog.title}</h1>
-        <p className="text-white/90 whitespace-pre-line">{blog.content}</p>
-        <button
-          onClick={() => navigate("/")}
-          className="mt-6 bg-white text-purple-600 font-semibold px-4 py-2 rounded-lg hover:bg-purple-100"
+    <div className="min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white p-10">
+      <div className="max-w-3xl mx-auto bg-white/10 backdrop-blur-md p-8 rounded-xl shadow-xl">
+        <h2 className="text-4xl font-bold mb-4">{blog.title}</h2>
+        {blog.image && (
+          <img
+            src={blog.image}
+            alt="Blog"
+            className="w-full h-64 object-cover rounded mb-4"
+          />
+        )}
+        <p className="text-white/90 whitespace-pre-wrap">{blog.content}</p>
+        <Link
+          to="/"
+          className="inline-block mt-6 text-blue-200 underline hover:text-blue-300"
         >
-          ← Back
-        </button>
+          ← Back to Blogs
+        </Link>
       </div>
     </div>
   );
-};
+}
 
 export default BlogDetails;

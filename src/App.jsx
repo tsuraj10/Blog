@@ -7,10 +7,11 @@ import BlogDetails from "./components/BlogDetails";
 function App() {
   const [blogs, setBlogs] = useState([]);
 
-  const addBlog = (title, content) => {
-    const newBlog = { id: Date.now(), title, content };
-    setBlogs([newBlog, ...blogs]);
-  };
+  const addBlog = (title, content, image) => {
+  const newBlog = { id: Date.now(), title, content, image };
+  setBlogs([newBlog, ...blogs]);
+};
+
 
   const deleteBlog = (id) => {
     setBlogs(blogs.filter((blog) => blog.id !== id));
