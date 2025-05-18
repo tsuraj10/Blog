@@ -1,4 +1,3 @@
-// src/components/Login.jsx
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
@@ -6,43 +5,24 @@ import { auth } from "../firebase";
 function Login({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      onLogin(userCredential.user);
+      const userCred = await signInWithEmailAndPassword(auth, email, password);
+      onLogin(userCred.user);
     } catch (err) {
-      setError("Invalid email or password");
+      alert("Login failed: " + err.message);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-full max-w-sm space-y-4">
-        <h2 className="text-2xl font-bold text-center text-purple-700">Login</h2>
-        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full p-2 border rounded"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full p-2 border rounded"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button
-          type="submit"
-          className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Sign In
-        </button>
+    <div className="p-6 max-w-md mx-auto bg-white rounded shadow">
+      <h2 className="text-2xl mb-4 font-bold text-center">Login</h2>
+      <form onSubmit={handleLogin} className="space-y-4">
+        <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="w-full p-2 border rounded" />
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" className="w-full p-2 border rounded" />
+        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded">Log In</button>
       </form>
     </div>
   );
