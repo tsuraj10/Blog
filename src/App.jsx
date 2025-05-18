@@ -81,14 +81,7 @@ function App() {
               {/* Show login prompt if not logged in */}
               {!isLoggedIn ? (
                 <div className="mb-6 text-center text-sm text-white/80">
-                  🔒 You must{" "}
-                  <a
-                    href="/login"
-                    className="underline"
-                  >
-                    log in
-                  </a>{" "}
-                  to post
+                  🔒 You must log in to post
                 </div>
               ) : (
                 <BlogForm addBlog={addBlog} />
