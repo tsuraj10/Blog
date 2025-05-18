@@ -2,9 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <script type="text/javascript">
-      // Redirect to index.html preserving the path
-      var redirectTo = '/Blog' + location.pathname.replace('/Blog', '') + location.search + location.hash;
+    <script>
+      var path = window.location.pathname;
+      var search = window.location.search;
+      var hash = window.location.hash;
+
+      var redirectTo = "/Blog" + path.replace(/^\/Blog/, "") + search + hash;
       window.location.replace(redirectTo);
     </script>
   </head>
