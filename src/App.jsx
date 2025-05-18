@@ -87,7 +87,6 @@ function App() {
               ) : (
                 <BlogForm addBlog={addBlog} />
               )}
-
               <BlogList blogs={blogs} deleteBlog={isLoggedIn ? deleteBlog : null} />
             </div>
           </div>
