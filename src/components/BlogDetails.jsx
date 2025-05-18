@@ -1,10 +1,34 @@
 import { useParams, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 function BlogDetails({ blogs }) {
   const { id } = useParams();
-  const blog = blogs.find((b) => b.id === Number(id));
+  const [blog, setBlog] = useState(null);
 
-  if (!blog) return <div className="text-white text-center">Blog not found</div>;
+  useEffect(() => {
+    const found = blogs.find((b) => b.id === id);
+    if (found) {
+      setBlog(found);
+    } else {
+      // Fallback fetch from Firestore
+      const fetchBlog = async () => {
+        try {
+          const docRef = doc(db, "blogs", id);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            setBlog({ id: docSnap.id, ...docSnap.data() });
+          }
+        } catch (err) {
+          console.error("Failed to fetch blog:", err);
+        }
+      };
+      fetchBlog();
+    }
+  }, [id, blogs]);
+
+  if (!blog) return <div className="text-white text-center mt-10">Loading blog...</div>;
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white p-10">
