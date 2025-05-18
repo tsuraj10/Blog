@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
@@ -8,7 +9,6 @@ import BlogList from "./components/BlogList";
 import BlogDetails from "./components/BlogDetails";
 import { collection, addDoc, Timestamp, onSnapshot, query, orderBy, doc, deleteDoc } from "firebase/firestore";
 import { db } from "./firebase";
-import { Link } from "react-router-dom";
 
 function App() {
   const [user, setUser] = useState(null);
