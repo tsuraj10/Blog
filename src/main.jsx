@@ -1,11 +1,11 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import { BrowserRouter } from 'react-router-dom'
-import App from './App'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import { HashRouter } from 'react-router-dom';  // changed
+import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter basename='/Blog'>
+  <HashRouter>
     <App />
-  </BrowserRouter>
-)
+  </HashRouter>
+);
